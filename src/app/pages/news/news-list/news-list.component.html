@@ -1,0 +1,22 @@
+<div class="container" fxLayout="column" fxLayoutAlign="center none">
+
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <a routerLink="add"><button mat-raised-button color="primary">Add news</button></a>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-around start">
+    <div fxLayout="column" fxLayoutAlign="center center"> 
+        <mat-list>
+            <mat-list-item *ngFor="let new of news" class="list-item">
+              <app-news-item 
+                [news]="new" 
+                (newsItemEvent)="printIconEvent($event)"
+                (deleteNewsEvent)="onDeleteNews($event)"
+                (editNewsEvent)="onEditNews($event)"></app-news-item>
+            </mat-list-item>
+          </mat-list>
+    </div>
+    <router-outlet></router-outlet>
+  </div>
+
+</div> 

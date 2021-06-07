@@ -1,0 +1,27 @@
+p {
+    margin: 0 0;
+}
+
+.item-image {
+    cursor: pointer;
+}
+
+.news-item {
+    background-color: thistle;
+    border-radius: 5px;
+    padding: 20px 10px;
+}
+
+img {
+    padding: 0px 10px;
+}
+
+mat-icon {
+   margin: 2px 2px;
+   cursor: pointer;
+}
+
+.icons-block
+{
+    margin-left: 10px;
+}

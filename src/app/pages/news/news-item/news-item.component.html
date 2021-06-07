@@ -1,0 +1,25 @@
+<div class="news-item">
+    <div fxLayout="row" fxLayoutAlign="center center" > 
+    
+        <img 
+            [src] ="news.imagePath" width="40" height="40"
+            (click)="newsImageClick('click')"
+            class="item-image">       
+        
+       <div fxLayout="row" fxLayoutAlign="space-between start">
+            <div fxLayout="column" fxLayoutAlign="center">
+                <p> {{news.title}}</p>
+
+                <p>
+                    <span> {{news.description}} </span>
+                </p>
+            </div>
+            <div class="icons-block">
+                <mat-icon (click)="onEditNews(news.id)" aria-hidden="false" aria-label="Edit">edit</mat-icon>
+                <mat-icon (click)="emitDeleteNews(news.id)" aria-hidden="false" aria-label="Delete">delete</mat-icon>
+            </div>
+        </div>
+        
+    </div>
+ </div>
+

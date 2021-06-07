@@ -1,0 +1,20 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+    <p>Manipulate news:</p>
+    <form [formGroup]="newsForm" (ngSubmit)="onSubmit()">
+        <div fxLayout="column" fxAlign="center">
+            <mat-form-field appearance="fill">
+                <mat-label>Image</mat-label>
+                <input matInput formControlName="imagePath" required>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Title</mat-label>
+                <input matInput formControlName="title" required>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Description</mat-label>
+                <input matInput formControlName="description">
+            </mat-form-field>
+            <button mat-raised-button color="primary">Submit</button>
+        </div>
+    </form>
+</div>
