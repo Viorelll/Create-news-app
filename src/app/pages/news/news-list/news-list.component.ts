@@ -34,6 +34,9 @@ export class NewsListComponent implements OnInit {
       this.key = newsResult['key'];
       this.removeNewsByKey(this.key);
 
+
+
+
       
     });
 
