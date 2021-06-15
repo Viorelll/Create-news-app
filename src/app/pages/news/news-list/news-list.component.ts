@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit } from '@angular/core';
 import { NewsService } from '../../../core/services/news.service';
 import { News } from '../../../core/models/news';
 import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-news-list',
@@ -19,12 +20,11 @@ export class NewsListComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.newsService.getNews().subscribe(newsList => {
-      this.news.push(...newsList);
-    });
 
-
-
+    this.newsService.refreshNews$
+      .pipe(
+        map(() => this.newsService.getNews().subscribe(result => this.news = result)))
+      .subscribe();
   }
 
   printIconEvent(iconItemEvent: string) {
@@ -36,17 +36,14 @@ export class NewsListComponent implements OnInit {
     this.newsService.getNewsById(newsId).subscribe(newsResult => {
       this.key = newsResult['key'];
       this.removeNewsByKey(this.key);
-
-
-
-
-      
     });
 
+    this.newsService.refreshNews();
     this.router.navigate(['/news-list']);
   }
 
   onEditNews(newsId: number) {
+    this.newsService.refreshNews();
     this.router.navigate(['/news-list/edit', newsId]);
   }
 
@@ -56,5 +53,3 @@ export class NewsListComponent implements OnInit {
       .subscribe(_ => console.log('The item was successfully deleted'));
   }
 }
-
-

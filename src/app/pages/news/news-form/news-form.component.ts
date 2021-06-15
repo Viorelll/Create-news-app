@@ -83,10 +83,8 @@ export class NewsFormComponent implements OnInit {
         .subscribe(_ => console.log('The item was successfully added. Id = ' + news.id));
     }
     
+  
+    this.newsService.refreshNews();
     this.router.navigate(['/news-list']);
   }
 }
-
-
-
-

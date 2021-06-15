@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { News } from '../models/news';
 import { map, tap } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,10 @@ export class NewsService {
  
   news: News[] = [];
   result: News | undefined;
+
+  refreshNewsSubject = new BehaviorSubject<News[]>([]);
+  public refreshNews$ = this.refreshNewsSubject.asObservable();
+
   //   new News(
   //     1,
   //     "https://image.shutterstock.com/image-vector/background-screen-saver-on-breaking-600w-723749530.jpg", 
@@ -29,10 +34,21 @@ export class NewsService {
       .get<any>(this.firebaseURL)
       .pipe(
         map(newsList => {
-          //console.log(newsList);
           return Object.keys(newsList).map(key=> newsList[key]);
         })
       );
+  }
+
+  refreshNews() {
+    return this.httpClient
+      .get<any>(this.firebaseURL)
+      .pipe(
+        map(newsList => {
+          return Object
+                .keys(newsList)
+                .map(key => this.refreshNewsSubject.next(newsList[key]));
+        })
+      ).subscribe();
   }
 
   getNewsCount() {
@@ -52,9 +68,6 @@ export class NewsService {
           map(newsList => {
             var key = Object.keys(newsList)
                             .find(key => (newsList[key] as News).id == newsId) as string;
-
-            //console.log(key);
-            
             return { 
               key: key, 
               item: newsList[key] 
