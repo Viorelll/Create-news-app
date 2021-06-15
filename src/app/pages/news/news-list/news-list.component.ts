@@ -22,6 +22,9 @@ export class NewsListComponent implements OnInit {
     this.newsService.getNews().subscribe(newsList => {
       this.news.push(...newsList);
     });
+
+
+
   }
 
   printIconEvent(iconItemEvent: string) {
