@@ -33,6 +33,8 @@ export class NewsListComponent implements OnInit {
     this.newsService.getNewsById(newsId).subscribe(newsResult => {
       this.key = newsResult['key'];
       this.removeNewsByKey(this.key);
+
+      
     });
 
     this.router.navigate(['/news-list']);
